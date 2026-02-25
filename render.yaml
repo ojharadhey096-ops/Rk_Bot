@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: radhey-ai-bot
+    env: docker
+    plan: starter
+    autoDeploy: true
+    region: oregon
+    # Render builds using Dockerfile at repo root by default
+    # No HTTP port needed for Telegram bot; long polling is outbound-only.
+    healthCheckPath: "/"  # not used, but required by blueprint UI
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false  # set in Render dashboard
+      - key: TZ
+        value: Asia/Kolkata
+    
+    # Auto-restart on failure is default. No scaling required for now.
