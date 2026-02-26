@@ -111,10 +111,15 @@ class RadheyAIBot:
     def __init__(self):
         self.bot_token = os.getenv('TELEGRAM_BOT_TOKEN', '')
         if not self.bot_token:
-            logger.warning('TELEGRAM_BOT_TOKEN not set. Bot will not start without a token.')
-        self.updater = Updater(token=self.bot_token, use_context=True)
-        self.dispatcher = self.updater.dispatcher
-        self.setup_handlers()
+            logger.error('TELEGRAM_BOT_TOKEN not set. Bot will not start without a valid token.')
+            raise ValueError('TELEGRAM_BOT_TOKEN environment variable is required')
+        try:
+            self.updater = Updater(token=self.bot_token, use_context=True)
+            self.dispatcher = self.updater.dispatcher
+            self.setup_handlers()
+        except Exception as e:
+            logger.error(f'Failed to initialize Telegram Bot: {e}')
+            raise
 
     # ============== Handler setup ==============
     def setup_handlers(self):
