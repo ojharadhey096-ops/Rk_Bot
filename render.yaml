@@ -10,7 +10,7 @@ services:
     healthCheckPath: "/"  # not used, but required by blueprint UI
     envVars:
       - key: TELEGRAM_BOT_TOKEN
-        sync: false  # set in Render dashboard
+        value: "8486079197:AAEaaYTRibnF23swgMwTt0igqzIy__WrMYU"
       - key: TZ
         value: Asia/Kolkata
     
