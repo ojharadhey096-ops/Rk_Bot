@@ -192,7 +192,7 @@ def main():
         runner = unittest.TextTestRunner(stream=sys.stdout, verbosity=2)
         result = runner.run(suite)
         
-        if result.failed:
+        if result.failures:
             print(f"❌ {len(result.failures)} tests failed")
         if result.errors:
             print(f"❌ {len(result.errors)} errors occurred")
